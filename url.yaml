@@ -1,0 +1,8 @@
+- path: /some-path
+  url: https://www.some-url.com/demo
+- path: /some-other-path
+  url: https://www.some-other-url.com/demo
+- path: /some-other-other-path
+  url: https://www.some-other-other-url.com/demo
+- path: /some-other-other-other-path
+  url: https://www.some-other-other-other-url.com/demo
