@@ -21,7 +21,7 @@ func ParseYaml(data []byte) (map[string]string, error) {
 	m := []map[string]string{}
 	ret := map[string]string{}
 
-	err := yaml.Unmarshal([]byte(data), &m)
+	err := yaml.Unmarshal(data, &m)
 	if err == nil {
 		for _, value := range m {
 			ret[value["path"]] = value["url"]
