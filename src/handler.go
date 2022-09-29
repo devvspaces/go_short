@@ -1,6 +1,7 @@
 package src
 
 import (
+	"log"
 	"net/http"
 )
 
@@ -12,13 +13,14 @@ import (
 // http.Handler will be called instead.
 func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.HandlerFunc {
 
-	for key, value := range pathsToUrls {
-		http.Handle(key, http.RedirectHandler(value, http.StatusPermanentRedirect))
+	return func(w http.ResponseWriter, r *http.Request) {
+		if val, ok := pathsToUrls[r.URL.Path]; ok {
+			log.Printf("Redirecting to %v", val)
+			http.Redirect(w, r, val, http.StatusFound)
+			return
+		}
+		fallback.ServeHTTP(w, r)
 	}
-
-	http.Handle("/", fallback)
-
-	return nil
 
 }
 
@@ -39,6 +41,6 @@ func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.Handl
 // See MapHandler to create a similar http.HandlerFunc via
 // a mapping of paths to urls.
 func YAMLHandler(yml []byte, fallback http.Handler) (http.HandlerFunc, error) {
-	mux, err := ParseYaml(yml)
-	return MapHandler(mux, fallback), err
+	pathToUrls, err := ParseYaml(yml)
+	return MapHandler(pathToUrls, fallback), err
 }
