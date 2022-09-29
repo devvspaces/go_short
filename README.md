@@ -1,6 +1,8 @@
 # Go Short
 This is a simple url shortener project built with Golang, with simplicity in mind. I learned more about reading files in Golang, JSON and YAML, and how to work with database in Golang. It seemed pretty hard to understand at first, but very simple to use once understood. Implemented a Builder pattern to create new db connections and wrote tests for reading yaml files.
 
+![](https://raw.githubusercontent.com/devvspaces/go_short/master/preview.gif)
+
 
 ## Features
 - Three built-in handlers
